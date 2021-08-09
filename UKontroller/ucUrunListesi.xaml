@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="UrunTakipApplication.UKontroller.ucUrunListesi"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UrunTakipApplication.UKontroller"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="#FFB27E7E"
+             Loaded="UserControl_Loaded"  
+             >
+    <Grid x:Name="grd1" >
+        <StackPanel HorizontalAlignment="Left" Height="415" Margin="10,10,0,0" VerticalAlignment="Top" MinWidth="770">
+            <GroupBox Header="Ürün Adına Göre Filtrele" HorizontalAlignment="Left" Height="77" Margin="10,10,0,10" VerticalAlignment="Top" Width="745">
+                <DockPanel VerticalAlignment="Center" Margin="10,0,10,0">
+                    <Label>Ürün Adı</Label>
+                    <TextBox Height="22" TextWrapping="Wrap" x:Name="txtAra" Width="362" SelectionChanged="txtAra_SelectionChanged"/>
+                </DockPanel>
+            </GroupBox>
+            <DataGrid  x:Name="dtgProducts" Margin="10,0,10,0"
+                     SelectionMode="Single" AutoGenerateColumns="False"
+                      AlternatingRowBackground="White"
+                      AlternationCount="0"
+                      Background="{x:Null}" BorderBrush="{x:Null}" 
+                      HeadersVisibility="Column" 
+                      Style="{DynamicResource DataGridStyle1}" 
+                      IsReadOnly="True" CanUserAddRows="False" CanUserSortColumns="True"
+                      CanUserResizeColumns="False" CanUserResizeRows="False" 
+                      >
+                <DataGrid.Resources> <!--datagridden özelik seçmek ve çift tıklamak için-->
+                    <Style TargetType="{x:Type DataGridRow}" > <!--hata almayalım diye handler buraya oluşturdum yoksa datagridde de çalışır-->
+                        <EventSetter Event="Control.MouseDoubleClick" Handler="dtgProducts_MouseDoubleClick" />
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" 
+                        Header="Sıra No " IsReadOnly="True" Width="SizeToHeader"/>
+                    <!--classdan Id değerini veritabanından getireceğiz-->
+                    <DataGridTextColumn Binding="{Binding Barkod}" 
+                        Header="Barkod"  Width="90"/>
+                    <DataGridTextColumn Binding="{Binding Stok}" 
+                        Header="Stok Miktarı"  Width="90"/>
+                    <DataGridTextColumn Binding="{Binding Kategori}" 
+                        Header="Kategori"  Width="90"/>
+                    <DataGridTextColumn Binding="{Binding Name}" 
+                        Header="Ürün Adı"  Width="120"/>
+                    <DataGridTextColumn Binding="{Binding UnitPrice}" 
+                        Header="Birim Fiyatı"  Width="90"/>
+                    <DataGridTextColumn Binding="{Binding SalePrice}" 
+                        Header="Satış Fiyatı"  Width="90"/>
+                    <DataGridTextColumn Binding="{Binding Kdv}" 
+                        Header="Kdv Tutarı"  Width="90"/>
+
+                </DataGrid.Columns>
+                <!--column oluşturacağız buraya-->
+
+            </DataGrid>
+        </StackPanel>
+        <Button x:Name="btnEkle" Style="{DynamicResource btnUrun}" Content="Ekle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="32,364,0,0" Click="btnEkle_Click"/>
+        <Button x:Name="btnTemizle" Style="{DynamicResource btnUrun}" Content="Temizle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="124,364,0,0" Click="btnTemizle_Click"/>
+        <Button x:Name="btnSil"  Style="{DynamicResource btnUrun}" Content="Sil" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="226,364,0,0" Click="btnSil_Click"/>
+        <Button x:Name="btnGuncelle" Style="{DynamicResource btnUrun}" Content="Güncelle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="328,364,0,0" Click="btnGuncelle_Click"/>
+    </Grid>
+</UserControl>

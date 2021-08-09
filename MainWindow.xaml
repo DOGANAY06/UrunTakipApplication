@@ -1,0 +1,201 @@
+﻿<Window x:Class="UrunTakipApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrunTakipApplication"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="600" MinWidth="800" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" AllowsTransparency="True" 
+        WindowStyle="None" Loaded="Window_Loaded" Icon="/Images/icon/iconum.png" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="170"/>
+            <!--label ve logo için-->
+            <RowDefinition  />
+            <!--header kısmı için-->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" x:Name="grdClmn_menu"/>
+            <!--menü kısmı için-->
+            <ColumnDefinition />
+            <!--menüden sonrası content kısmı-->
+        </Grid.ColumnDefinitions>
+        <!--logo ve mini button kısmı-->
+        <Border Background="#FFEA2027" Grid.Column="0" Grid.Row="0"  >
+            <Grid Margin="15">
+                <Grid.Effect>
+                    <DropShadowEffect Direction="265" BlurRadius="10" Opacity="0.45"/>
+                </Grid.Effect>
+                <!--logoya gölge vermek için effect ekledim kenardanda 15 uzaklıkta-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <!--UYGULAMA BAŞLIĞA VE İCON-->
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" >
+                    <!--dockpanel:4 kenardan kenetlenmiş alandır
+                    biz bu alana logo ve uygulama ismini koyacağız
+                    kısaca içerisinde bulunan kontrolleri içerisinde yaşlama yapar
+                    -->
+                    <!--icon ve label için -->
+                    <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image Source="/Images/icon/icon.png" Height="24" Width="24" />
+                        <Label Content="Stok Takip" 
+                               Foreground="White" HorizontalContentAlignment="Center" 
+                               FontSize="14" FontWeight="ExtraBold" 
+                               Width="179"
+                               x:Name="lbl_logoyazi" VerticalContentAlignment="Center"
+                               />
+
+                    </DockPanel>
+                </Border>
+                <!--logo için gereken yer -->
+                <Border Grid.Row="1">
+                    <Border.Style>
+                        <!--mouse üzerine gelince sürüm yazısının saydamlaşmasını istiyoruz-->
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="#FFEA2027"/>
+                            <Style.Triggers>
+                                <!--TETİKLEYİCİDİR-->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#99752727"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="btn_hamburgerMenu" MouseDown="btn_hamburgerMenu_MouseDown">
+                            <!--HAMBURGER MENÜ BURADAN SAĞLANACAK TIKLAYINCA İÇERİ GEÇİCEK MENÜ BAR-->
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="/Images/icon/logo.png"/>
+                                    <Setter Property="Height" Value="auto"/>
+                                    <Setter Property="Width" Value="100"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <!--mouse üzerine geldiğinde-->
+                                            <Setter Property="Source" Value="Images/icon/logo.png"/>
+                                            <Setter Property="Width" Value="105"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </Border>
+        <!--mini button (kapatma büyütme alta indirme ve başlık-->
+        <Border Background="#FFEA2027" Grid.Column="1" Grid.Row="0" x:Name="brd_Sagust" MouseDown="brd_Sagust_MouseDown">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <!--mini buttons kısmı -->
+                    <RowDefinition/>
+                    <!--header kısmı -->
+                </Grid.RowDefinitions>
+                <!--1.satırda mini buttons-->
+                <Border Background="White" Grid.Row="0">
+                    <DockPanel Width="108" HorizontalAlignment="Right"  >
+                        <Button Content="_" Style="{DynamicResource minibutonlar}" FontSize="12" x:Name="btn_SimgeDurumu"  Click="btn_SimgeDurumu_Click"/>
+                        <Button Content="| |" Style="{DynamicResource minibutonlar}" FontSize="12" x:Name="btn_TamEkran" Click="btn_TamEkran_Click" />
+                        <Button Content="X" Width="40" x:Name="btn_kapat" Click="btn_kapat_Click" Style="{DynamicResource minibutonlar}"  FontSize="12"/>
+                    </DockPanel>
+                </Border>
+                <!--2.satırda header-->
+                <Border Grid.Row="1" Background="#FFEA2027" >
+                    <Border.Effect>
+                        <DropShadowEffect Direction="221" Opacity="0.35"/>
+                    </Border.Effect>
+                    <Grid>
+                        <!--BURADA 2 BÖLÜME AYIRDIM çünkü başlık ve admin gözükecek-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="350" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,335,0">
+                            <Border.Background>
+                                <ImageBrush ImageSource="Images/pencereresimler/penceresol.png" />
+                            </Border.Background>
+                            <StackPanel VerticalAlignment="Center" Margin="15,0,0,0" >
+                                <DockPanel>
+                                    <Label Content="Max Ürün Sayısı" FontSize="18" Foreground="#FFFFECEC"/>
+                                    <Label Content="1500+" FontSize="18" Foreground="#FFA3B9E1" />
+                                </DockPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <DockPanel>
+                                        <Label Content="Ürün Kategorisi:" FontSize="20" Foreground="#FFFFECEC"/>
+                                        <Label Content="18" FontSize="20" Foreground="#FFA3B9E1" />
+                                    </DockPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1" Margin="29,3,0,0">
+                            <!--sağ pencere için-->
+                            <Border.Background>
+                                <ImageBrush ImageSource="Images/pencereresimler/penceresag.png" />
+                            </Border.Background>
+                            <Border Width="220" Height="120" CornerRadius="10,10,10,10">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Images/icon/businessman.png" Width="100"/>
+                                    <StackPanel VerticalAlignment="Center" Margin="3,0,0,0"  >
+                                        <Label Content="Doğan AY" Background="#FFEA2027" FontWeight="Bold" Foreground="WhiteSmoke" />
+                                        <Label Content="Admin" Background="#FFEA2027" FontWeight="Bold" Foreground="WhiteSmoke" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <!--MENÜ BORDER VE içerisinde bulunan menü bar en altta footer-->
+        <Border Background="#FFEA2027" Grid.Column="0" Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <!--2 SATIRLIK ALANA BÖLECEM ÇÜNKÜ footer kısmı ve menü kısmı diye ayırıcam-->
+                    <RowDefinition/>
+                    <RowDefinition Height="140" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <!--buttonları tooglebutton yapacağım çünkü tıklandığında aktif olmasını istiyorum-->
+                    <ToggleButton Height="50" Style="{DynamicResource menubutonlar}" HorizontalAlignment="Left"
+                    x:Name="menubuton_randevular" Click="menubuton_randevular_Click"  >
+                        <DockPanel Width="220" Margin="15,0,0,0">
+                            <Image Source="/Images/icon/ürünler.png" Width="32"/>
+                            <Label Content="Ürün Listesi" Foreground="White" FontSize="16" x:Name="lbl_menu1"/>
+                        </DockPanel>
+                    </ToggleButton>
+                    <ToggleButton Height="50" Style="{DynamicResource menubutonlar}" HorizontalAlignment="Left"
+                    x:Name="menubuton_hakkinda" Click="menubuton_hakkinda_Click"   >
+                        <DockPanel Width="220" Margin="15,0,0,0">
+                            <Image Source="/Images/icon/info.png" Width="32"/>
+                            <Label Content="Hakkında" Foreground="White" FontSize="16" x:Name="lbl_menu2"/>
+                        </DockPanel>
+                    </ToggleButton>
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <Image Source="Images/pencereresimler/altpencere.jpg" 
+                           Height="130" Panel.ZIndex="-99"
+                           x:Name="menu_altpencere_resim"
+                           />
+                    <Canvas>
+                        <Border Canvas.Left="45" Canvas.Top="-40" Background="#FFCE1D16" CornerRadius="10,10,10,10" Cursor="Hand" x:Name="menu_border" Width="115">
+                            <Label Content="1.0.0.1" Canvas.Left="35" Canvas.Top="-40" FontSize="16"
+                               VerticalContentAlignment="Center"
+                               HorizontalContentAlignment="Center"
+                                x:Name="menu_altlabel"
+                               Foreground="#FFDEDEDE" Margin="-10,0,-20,0"/>
+                        </Border>
+                    </Canvas>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <!--content içerik -->
+        <Border Grid.Column="1" Grid.Row="1" Background="#FFB3DDF5">
+            <Grid x:Name="Content_icerik">
+
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

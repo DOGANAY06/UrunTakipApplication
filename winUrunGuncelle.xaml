@@ -1,0 +1,103 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrunTakipApplication"
+        xmlns:Classlar="clr-namespace:UrunTakipApplication.Classlar" x:Class="UrunTakipApplication.winUrunGuncelle"
+        mc:Ignorable="d"
+        Title="winUrunGuncelle" Height="400" Width="900" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Window.DataContext>
+        <Classlar:Product/>
+    </Window.DataContext>
+    <Grid >
+        <Canvas>
+            <Image Source="/Images/icon/update.png" Height="69" Canvas.Top="30" Canvas.Left="166" Width="90" Panel.ZIndex="3" 
+                   x:Name="btn_UrunGuncelle" MouseDown="btn_UrunGuncelle_MouseDown"
+                   />
+            <Label Content="Ürün Güncelleme Penceresi" Panel.ZIndex="3"
+                   Canvas.Left="269" Canvas.Top="48"
+                   Foreground="White" HorizontalContentAlignment="Left"
+                   Style="{DynamicResource Label_yanipson}"
+                   VerticalContentAlignment="Center" FontSize="16"/>
+            <Rectangle Fill="#FFFD9999" Height="43" Width="661" Canvas.Left="197" Canvas.Top="43" Panel.ZIndex="1"/>
+            <Ellipse Height="111" Width="108" Canvas.Left="156"
+                     Canvas.Top="10" Panel.ZIndex="2" StrokeThickness="4" 
+                     RenderTransformOrigin="0.5,0.5" Style="{DynamicResource don_dunya}">
+                <Ellipse.RenderTransform>
+                    <RotateTransform/>
+                    <!--dönme animasyonu verdim-->
+                </Ellipse.RenderTransform>
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF134187" Offset="0.963"/>
+                        <GradientStop Color="White" Offset="0.983"/>
+                        <GradientStop Color="#FFF1F2F3" Offset="0.937"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+                <Ellipse.Stroke>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF134187" Offset="0.187"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FF4B6EA3" Offset="0.817"/>
+                        <GradientStop Color="White"/>
+                    </LinearGradientBrush>
+                </Ellipse.Stroke>
+            </Ellipse>
+            <Border Height="304" Width="661" Canvas.Left="197" Canvas.Top="86" Background="#FFE0DFE1" CornerRadius="0,0,50,50">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.35" Direction="275"/>
+                </Border.Effect>
+            </Border>
+            <Label Content="Barkod" Canvas.Left="241" Canvas.Top="174" Background="#FFFD9999" Foreground="White" Width="84" RenderTransformOrigin="0.629,0.128"/>
+            <TextBox Text="{Binding Barkod}"
+                Canvas.Left="331" Canvas.Top="173"  Width="123" Height="28" Style="{DynamicResource MoseOverImageChange_Textbox}" BorderBrush="#FF99BEFD" x:Name="txt_barkod" />
+            <Label Content="Stok:" Canvas.Left="241" Canvas.Top="206" Background="#FFFD9999" Foreground="White" Width="84" Height="28"/>
+            <TextBox Text="{Binding Stok}"
+                Canvas.Left="331" Canvas.Top="207"  Width="123" Height="28" Style="{DynamicResource MoseOverImageChange_Textbox}" BorderBrush="#FF99BEFD" x:Name="txtStok"   />
+            <Label Content="Kategori:" Canvas.Left="241" Canvas.Top="244" Background="#FFFD9999" Foreground="White" Width="84" RenderTransformOrigin="0.629,0.128"/>
+            <TextBox Text="{Binding Kategori}"
+                Canvas.Left="331" Canvas.Top="240"  Width="123" Height="28" Style="{DynamicResource MoseOverImageChange_Textbox}" BorderBrush="#FF99BEFD" x:Name="txtKategori"   />
+            <Label Content="Ürün Geliş Fiyatı:" Canvas.Left="492" Canvas.Top="155" Background="#FFFD9999" Foreground="White" Width="113" RenderTransformOrigin="0.629,0.128" Height="31"/>
+            <TextBox Text="{Binding UnitPrice}"
+                Canvas.Left="622" Canvas.Top="153"  Width="123" Height="28" Style="{DynamicResource MoseOverImageChange_Textbox}" BorderBrush="#FF99BEFD" x:Name="txtUnitPrice" />
+            <Label Content="Ürün Satış Fiyatı:" Canvas.Left="492" Canvas.Top="201" Background="#FFFD9999" Foreground="White" Width="113" RenderTransformOrigin="0.629,0.128" Height="31"/>
+            <TextBox Text="{Binding SalePrice}"
+                Canvas.Left="622" Canvas.Top="202"  Width="123" Height="28" Style="{DynamicResource MoseOverImageChange_Textbox}" BorderBrush="#FF99BEFD" x:Name="txtSalePrice"  />
+            <Label Content="Kdv Tutarı" Canvas.Left="492" Canvas.Top="243" Background="#FFFD9999" Foreground="White" Width="113" RenderTransformOrigin="0.629,0.128" Height="31"/>
+            <TextBox Text="{Binding Kdv}"
+                Canvas.Left="622" Canvas.Top="244"  Width="123" Height="28" Style="{DynamicResource MoseOverImageChange_Textbox}" BorderBrush="#FF99BEFD" x:Name="txtKdv"  />
+            <Button Canvas.Left="726" Canvas.Top="43" Panel.ZIndex="5" Height="56" Width="66" Style="{DynamicResource DaireButoniptal}" x:Name="btn_UrunKapat" Click="btn_UrunKapat_Click" ToolTip="Kapat"/>
+            <Button Canvas.Left="792" Canvas.Top="43" Panel.ZIndex="5" Height="56" 
+                    Width="66" Style="{DynamicResource DaireButonBilgi}" 
+                 x:Name="btn_UrunEkleBilgi" ToolTip="Bilgi Al"
+                    Click="btn_UrunEkleBilgi_Click"
+                    />
+
+            <Grid Width="220" Height="195" Canvas.Left="860" Canvas.Top="100" >
+
+                <Popup Placement="Center" x:Name="popup_Bilgi"
+                       AllowsTransparency="True" PopupAnimation="Slide"
+                       >
+                    <!--popup açılacağı yer placement-->
+                    <Border Background="#FF99BEFD" Width="225" Height="150" CornerRadius="0,20,50,30">
+                        <StackPanel Margin="10,10,-23,0" >
+                            <TextBlock Text="Bilgilendirme" Foreground="White"
+                                       FontWeight="Bold" 
+                                       />
+                            <TextBlock Text="&#xA; Ürünüzün değiştirmek istediğiniz &#xA; sütununu seçiniz değişiklilik &#xA; işlemini tamamladıktan sonra &#xA; güncelle buttonuna başınız." Foreground="White"
+                                       FontWeight="Bold" 
+                                       />
+                        </StackPanel>
+                    </Border>
+                </Popup>
+            </Grid>
+            <Label Content="Id:" Canvas.Left="242" Canvas.Top="141" Background="#FFFD9999" Foreground="White" Width="84" RenderTransformOrigin="0.629,0.128"/>
+            <TextBox Text="{Binding Id}"
+                Canvas.Left="331" Canvas.Top="140"  Width="123" Height="28" Style="{DynamicResource MoseOverImageChange_Textbox}" BorderBrush="#FF99BEFD" x:Name="txtId" RenderTransformOrigin="0.407,0.821" IsEnabled="False" />
+            <Label Content="Ürün Adı:" Canvas.Left="240" Canvas.Top="278" Background="#FFFD9999" Foreground="White" Width="84" RenderTransformOrigin="0.629,0.128"/>
+            <TextBox Text="{Binding Name}"
+                Canvas.Left="330" Canvas.Top="277"  Width="123" Height="28" Style="{DynamicResource MoseOverImageChange_Textbox}" BorderBrush="#FF99BEFD" x:Name="txtName"   />
+        </Canvas>
+    </Grid>
+</Window>
